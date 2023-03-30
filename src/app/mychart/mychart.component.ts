@@ -42,9 +42,9 @@ export class MychartComponent implements OnInit{
         }
 
         this.RenderChart(this.year,this.amount,this.colorcode,this.minBarLength,'bar','barchart');
-        // this.RenderChart(this.year,this.amount,this.colorcode,'pie','piechart');
-        // this.RenderChart(this.year,this.amount,this.colorcode,'line','linechart');
-        // this.RenderChart(this.year,this.amount,this.colorcode,'scatter','scatterchart');
+        this.RenderChart(this.year,this.amount,this.colorcode,this.minBarLength,'pie','piechart');
+        this.RenderChart(this.year,this.amount,this.colorcode,this.minBarLength,'line','linechart');
+        this.RenderChart(this.year,this.amount,this.colorcode,this.minBarLength,'scatter','scatterchart');
        
         console.log(this.year, this.amount, this.minBarLength)
       }
@@ -93,9 +93,6 @@ const myChart = new Chart(id, {
             data: amount,
             backgroundColor: colorcode ,
             
-            // borderColor: [
-            //         'rgba(255, 99, 132, 1)'
-            // ],
           
         },
 
@@ -105,9 +102,6 @@ const myChart = new Chart(id, {
             data:minBarLength,
             backgroundColor:colorcode ,
            
-            // borderColor: [
-            //        'rgba(255, 99, 132, 1)'
-            // ],
            
         },
 
@@ -116,10 +110,7 @@ const myChart = new Chart(id, {
             data:this.amount,
             backgroundColor:colorcode,
             
-            // borderColor: [
-            //         'rgba(255, 99, 132, 1)'
-            // ],
-            //  borderWidth: 1
+
         }]
 
            
