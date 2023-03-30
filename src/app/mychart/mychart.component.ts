@@ -23,9 +23,10 @@ export class MychartComponent implements OnInit{
   year:any[]=[];
   amount:any[]=[];
   colorcode:any[]=[];
+  minBarLength:any[]=[]; 
 
 
-
+// thirdAmount:number[] = [4100, 2100, 4100]
   ngOnInit(): void {
 
     this.service.Getchartinfo().subscribe((result:any) =>{
@@ -37,48 +38,102 @@ export class MychartComponent implements OnInit{
           this.year.push(this.chartdata[i].year);
           this.amount.push(this.chartdata[i].amount);
           this.colorcode.push(this.chartdata[i].colorcode);
+          this. minBarLength.push(this.chartdata[i].minBarLength);
         }
 
-        this.RenderChart(this.year,this.amount,this.colorcode,'bar','barchart');
+        this.RenderChart(this.year,this.amount,this.colorcode,this.minBarLength,'bar','barchart');
         // this.RenderChart(this.year,this.amount,this.colorcode,'pie','piechart');
         // this.RenderChart(this.year,this.amount,this.colorcode,'line','linechart');
         // this.RenderChart(this.year,this.amount,this.colorcode,'scatter','scatterchart');
        
-        console.log(this.year, this.amount)
+        console.log(this.year, this.amount, this.minBarLength)
       }
     });
 
 
   }
   
-  RenderChart(year:any,amount:any,colorcode:any,type:any,id:any){
-    const myChart = new Chart(id,{
+  RenderChart(year:any,amount:any,colorcode:any, minBarLength:any,type:any,id:any){
+  //   const myChart = new Chart(id,{
+  //   type: type,
+  //   data: {
+  //     labels:year,
+  //     datasets: [{
+  //       label: 'Present',
+  //       data: amount,
+  //       backgroundColor: colorcode,
+  //       borderColor: [
+  //         'rgba(255, 99, 132, 1)'
+  //       ],
+  //       borderWidth: 1
+  //     }]
+  //   },
+  //   options: {
+  //     scales: {
+  //       y: {
+  //         beginAtZero: true
+  //       }
+  //     }
+  //   }
+  // });
+
+  
+
+
+
+
+
+
+const myChart = new Chart(id, {
     type: type,
     data: {
-      labels:year,
-      datasets: [{
-        label: '# of Votes',
-        data: amount,
-        backgroundColor: colorcode,
-        borderColor: [
-          'rgba(255, 99, 132, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
+        labels: year,
+        datasets: [{
+            label: 'Present',
+            data: amount,
+            backgroundColor: colorcode ,
+            
+            // borderColor: [
+            //         'rgba(255, 99, 132, 1)'
+            // ],
+          
+        },
 
+
+    {
+            label: 'Absent',
+            data:minBarLength,
+            backgroundColor:colorcode ,
+           
+            // borderColor: [
+            //        'rgba(255, 99, 132, 1)'
+            // ],
+           
+        },
+
+   {
+            label: 'Leaves',
+            data:this.amount,
+            backgroundColor:colorcode,
+            
+            // borderColor: [
+            //         'rgba(255, 99, 132, 1)'
+            // ],
+            //  borderWidth: 1
+        }]
+
+           
+     },
+        options: {
+               scales: {
+                  y: {
+                 beginAtZero: true
+             }
+        }
+    }
+    });
   }
 
 
-
-
-  
 }
+
